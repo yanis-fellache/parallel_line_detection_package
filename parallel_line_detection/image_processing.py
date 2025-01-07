@@ -1,7 +1,7 @@
 import cv2
 import numpy as np
-from .line_processing import compute_line, compute_center
-from .utils import compute_slope, compute_length, update
+from line_processing import compute_line, compute_center
+from utils import compute_slope, compute_length, update
 
 def process_frame(frame):
     height, width, _ = frame.shape

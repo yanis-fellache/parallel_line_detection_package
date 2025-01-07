@@ -1,4 +1,4 @@
-from .utils import compute_slope, compute_length, update
+from utils import compute_slope, compute_length, update
 
 
 def compute_line(lines):

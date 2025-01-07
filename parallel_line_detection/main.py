@@ -1,5 +1,5 @@
 import cv2
-from .image_processing import process_frame
+from image_processing import process_frame
 
 '''Original code from Insomnia Robot Line Detection and adapted for assignment'''
 
