@@ -67,6 +67,14 @@ def compute_center(lines):
         # print(f"n_lines: {lines}")
         line1, line2 = lines[0], lines[1]
 
+        x_temp = sorted([line1[0], line1[2]])
+        y_temp = sorted([line1[1], line1[3]])
+        line1 = [x_temp[0], y_temp[0], x_temp[1], y_temp[1]]
+
+        x_temp = sorted([line2[0], line2[2]])
+        y_temp = sorted([line2[1], line2[3]])
+        line2 = [x_temp[0], y_temp[0], x_temp[1], y_temp[1]]
+        
         x1 = int((line1[0] + line2[0]) / 2)
         y1 = int((line1[1] + line2[1]) / 2)
         x2 = int((line1[2] + line2[2]) / 2)
