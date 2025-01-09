@@ -5,10 +5,10 @@ from utils import compute_slope, compute_length, update
 
 def process_frame(frame):
     height, width, _ = frame.shape
-    crop_size_x = int(width * 1/2)
-    crop_size_y = int(height* 1/2)
-    start_x = int(width * 1/4)
-    start_y = int(height * 1/4)
+    crop_size_x = int(width * 3/5)
+    crop_size_y = int(height* 3/5)
+    start_x = int(width * 1/5)
+    start_y = int(height * 1/5)
     cropped_image = frame[start_y:start_y + crop_size_y, start_x:start_x + crop_size_x]
     # cv2.imshow("Cropped Image", cropped_image)
     # cv2.waitKey(0)
@@ -22,16 +22,14 @@ def process_frame(frame):
 
     blurred = cv2.GaussianBlur(gray, (5, 5), 0)
     edges = cv2.Canny(blurred, 100, 200)
-    cv2.imshow("Edges", edges)
     lines = cv2.HoughLinesP(edges, 1, np.pi / 180, 200, minLineLength=60, maxLineGap=20)
 
     n_lines = []
     centerline = []
     if lines is not None:
-        for line in lines:
-            print(compute_slope(line[0]))
+        # for line in lines:
+            # print(compute_slope(line[0]))
         n_lines = compute_line(lines)
-        centerline = compute_center(n_lines, frame)
 
     if n_lines is not None:
         for line in n_lines:
@@ -41,11 +39,13 @@ def process_frame(frame):
             #     cv2.line(frame, (int(x1 + width*1/5), int(y1 + height*1/5)), (int(x2 + width*1/5), int(y2 + height*1/5)), (0, 0, 255), 10)
             #     continue
             if compute_length(line) > 200:
-                cv2.line(frame, (int(x1 + width*1/4), int(y1 + height*1/4)), (int(x2 + width*1/4), int(y2 + height*1/4)), (0, 255, 0), 10)
+                cv2.line(frame, (int(x1 + width*1/5), int(y1 + height*1/5)), (int(x2 + width*1/5), int(y2 + height*1/5)), (0, 255, 0), 10)
                 continue
+        centerline = compute_center(n_lines)
 
-    if centerline and compute_slope(centerline) != 0:
+    # if centerline and compute_slope(centerline) != 0:
+    if centerline:
         x1, y1, x2, y2 = centerline
-        cv2.line(frame, (int(x1 + width*1/4), int(y1 + height*1/4)), (int(x2 + width*1/4), int(y2 + height*1/4)), (255, 0, 0), 10)
+        cv2.line(frame, (int(x1 + width*1/5), int(y1 + height*1/5)), (int(x2 + width*1/5), int(y2 + height*1/5)), (255, 0, 0), 10)
 
     return frame

@@ -43,29 +43,34 @@ def are_parallel(slope1, slope2):
         return abs(abs(slope1) - abs(slope2)) < 0.5
 
 
-def compute_center(lines, frame):
-    parallel_pairs = []
-    for i in range(len(lines)):
-        for j in range(i + 1, len(lines)):
-            slope1 = compute_slope(lines[i])
-            slope2 = compute_slope(lines[j])
+def compute_center(lines):
+    # parallel_pairs = []
+    # for i in range(len(lines)):
+    #     for j in range(i + 1, len(lines)):
+    #         slope1 = compute_slope(lines[i])
+    #         slope2 = compute_slope(lines[j])
 
-            if are_parallel(slope1, slope2):
-                length1 = compute_length(lines[i])
-                length2 = compute_length(lines[j])
+    #         if are_parallel(slope1, slope2):
+    #             length1 = compute_length(lines[i])
+    #             length2 = compute_length(lines[j])
 
-                if length1 > 100 and length2 > 100:
-                    parallel_pairs.append((lines[i], lines[j], length1 + length2))
+    #             if length1 > 100 and length2 > 100:
+    #                 parallel_pairs.append((lines[i], lines[j], length1 + length2))
 
-    if not parallel_pairs:
-        return [0, 0, 0, 0]
+    # if not parallel_pairs:
+    #     return 
 
-    parallel_pairs.sort(key=lambda x: x[2], reverse=True)
-    line1, line2, _ = parallel_pairs[0]
+    # parallel_pairs.sort(key=lambda x: x[2], reverse=True)
+    # line1, line2, _ = parallel_pairs[0]
+    ans = [0, 0, 0, 0]
+    if len(lines) > 1:
+        # print(f"n_lines: {lines}")
+        line1, line2 = lines[0], lines[1]
 
-    x1 = int((line1[0] + line2[0]) / 2)
-    y1 = int((line1[1] + line2[1]) / 2)
-    x2 = int((line1[2] + line2[2]) / 2)
-    y2 = int((line1[3] + line2[3]) / 2)
-
-    return [x1, y1, x2, y2]
+        x1 = int((line1[0] + line2[0]) / 2)
+        y1 = int((line1[1] + line2[1]) / 2)
+        x2 = int((line1[2] + line2[2]) / 2)
+        y2 = int((line1[3] + line2[3]) / 2)
+        ans = [x1, y1, x2, y2]
+        print(ans)
+    return ans

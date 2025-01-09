@@ -14,8 +14,10 @@ def main():
         # frame = cv2.imread("vertical.jpg")
         frame = process_frame(frame)
         cv2.imshow("Image With Lines", frame)
+        
         if cv2.waitKey(1) == ord('q'):
             break
+
 
     cap.release()
         # cv2.waitKey(0)
